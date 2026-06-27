@@ -1,0 +1,8 @@
+# Local environment overrides (real DB host/credentials)
+.env
+
+# Editor/MCP config with real connection details (see mcp.json.example)
+.vscode/mcp.json
+
+# OS noise
+.DS_Store
