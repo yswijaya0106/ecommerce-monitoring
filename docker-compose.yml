@@ -49,6 +49,7 @@ services:
       - "8889:8889" # Prometheus exporter
     depends_on:
       - jaeger
+      - loki
 
   jaeger:
     image: jaegertracing/all-in-one:latest

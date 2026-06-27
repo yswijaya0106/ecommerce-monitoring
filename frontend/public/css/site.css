@@ -1,0 +1,166 @@
+:root {
+    --brand: #5b3df0;
+    --brand-dark: #3d28a8;
+    --brand-light: #efeaff;
+    --surface: #ffffff;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    background-color: #f4f5fb;
+}
+
+/* Navbar */
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: .01em;
+}
+
+.navbar-brand .bi {
+    color: var(--brand-light);
+}
+
+.navbar.bg-brand {
+    background: linear-gradient(90deg, var(--brand-dark), var(--brand));
+}
+
+.navbar .nav-link {
+    font-weight: 500;
+}
+
+.navbar .nav-link.active {
+    color: #fff !important;
+    position: relative;
+}
+
+.navbar .nav-link.active::after {
+    content: "";
+    position: absolute;
+    left: .5rem;
+    right: .5rem;
+    bottom: -2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+}
+
+.cart-badge {
+    font-size: .7rem;
+    transform: translateY(-1px);
+}
+
+/* Hero */
+.page-hero {
+    background: linear-gradient(120deg, var(--brand-dark), var(--brand));
+    color: #fff;
+    border-radius: 1rem;
+    padding: 2.25rem 2rem;
+    margin-bottom: 2rem;
+}
+
+.page-hero h1 {
+    font-weight: 800;
+}
+
+.page-hero p {
+    opacity: .85;
+    margin-bottom: 0;
+}
+
+/* Category pills */
+.category-pills .nav-link {
+    border-radius: 999px;
+    padding: .4rem 1rem;
+    color: #4b4b63;
+    background: var(--surface);
+    border: 1px solid #e6e3f7;
+    font-weight: 500;
+    font-size: .875rem;
+}
+
+.category-pills .nav-link.active {
+    background: var(--brand);
+    color: #fff;
+    border-color: var(--brand);
+}
+
+/* Product cards */
+.product-card {
+    border: 1px solid #ebe9f5;
+    border-radius: 1rem;
+    transition: transform .15s ease, box-shadow .15s ease;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 1rem 2rem rgba(91, 61, 240, .12);
+}
+
+.product-icon {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: .75rem;
+    background: var(--brand-light);
+    color: var(--brand-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+.product-price {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--brand-dark);
+}
+
+.btn-brand {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: #fff;
+}
+
+.btn-brand:hover {
+    background: var(--brand-dark);
+    border-color: var(--brand-dark);
+    color: #fff;
+}
+
+/* Cards / tables shared */
+.surface-card {
+    border: 1px solid #ebe9f5;
+    border-radius: 1rem;
+}
+
+.table-clean thead th {
+    border-bottom-width: 1px;
+    color: #6b6b85;
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    font-weight: 600;
+}
+
+.table-clean td, .table-clean th {
+    vertical-align: middle;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #6b6b85;
+}
+
+.empty-state .bi {
+    font-size: 2.5rem;
+    color: var(--brand);
+    margin-bottom: .75rem;
+    display: block;
+}
+
+footer.site-footer {
+    color: #8d8da3;
+    font-size: .875rem;
+    padding: 2rem 0;
+}

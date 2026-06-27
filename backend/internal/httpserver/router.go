@@ -21,6 +21,7 @@ func New(productHandler *product.Handler, customerHandler *customer.Handler, ord
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
 	r.Use(corsMiddleware)
+	r.Use(requestResponseLogging)
 
 	r.Get("/healthz", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")

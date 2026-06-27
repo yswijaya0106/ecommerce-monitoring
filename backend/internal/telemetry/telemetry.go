@@ -6,9 +6,12 @@ import (
 	"time"
 
 	"go.opentelemetry.io/otel"
+	"go.opentelemetry.io/otel/exporters/otlp/otlplog/otlploggrpc"
 	"go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetricgrpc"
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
+	otellog "go.opentelemetry.io/otel/log/global"
 	"go.opentelemetry.io/otel/propagation"
+	sdklog "go.opentelemetry.io/otel/sdk/log"
 	"go.opentelemetry.io/otel/sdk/metric"
 	sdkresource "go.opentelemetry.io/otel/sdk/resource"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
@@ -66,12 +69,29 @@ func Setup(ctx context.Context, serviceName, serviceVersion, otlpEndpoint string
 	)
 	otel.SetMeterProvider(meterProvider)
 
+	logExporter, err := otlploggrpc.New(ctx,
+		otlploggrpc.WithEndpoint(otlpEndpoint),
+		otlploggrpc.WithInsecure(),
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	loggerProvider := sdklog.NewLoggerProvider(
+		sdklog.WithProcessor(sdklog.NewBatchProcessor(logExporter)),
+		sdklog.WithResource(res),
+	)
+	otellog.SetLoggerProvider(loggerProvider)
+
 	shutdown := func(ctx context.Context) error {
 		var errs []error
 		if err := tracerProvider.Shutdown(ctx); err != nil {
 			errs = append(errs, err)
 		}
 		if err := meterProvider.Shutdown(ctx); err != nil {
+			errs = append(errs, err)
+		}
+		if err := loggerProvider.Shutdown(ctx); err != nil {
 			errs = append(errs, err)
 		}
 		return errors.Join(errs...)
